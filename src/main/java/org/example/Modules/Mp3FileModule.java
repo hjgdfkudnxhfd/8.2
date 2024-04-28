@@ -3,14 +3,8 @@ package org.example.Modules;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.Tag;
 import org.springframework.stereotype.Component;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 
 @Component
 public class Mp3FileModule implements FileModule{
