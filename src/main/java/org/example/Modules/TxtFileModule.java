@@ -1,7 +1,6 @@
 package org.example.Modules;
 
 import org.springframework.stereotype.Component;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,7 +10,7 @@ import java.util.Map;
 
 @Component
 public class TxtFileModule implements FileModule{
-    String basePath = "C:\\Users\\val_4\\source\\repos\\JavaLaba8.2\\JustDirWithRandomFiles";
+    String basePath = "C:\\Users\\val_4\\source\\repos\\JavaLaba8.2\\Test_files";
     @Override
     public boolean isCurrentFileFormatWorks(String path) {
         return path.endsWith(".txt");
@@ -19,9 +18,9 @@ public class TxtFileModule implements FileModule{
 
     @Override
     public void getDesc() {
-        System.out.println("Функция номер 1 - выводит кол-во строк");
-        System.out.println("Функция номер 2 - выводит частоты вхождения каждого символа");
-        System.out.println("Функция номер 3 - выводит кол-во символов");
+        System.out.println("1) Вывод количества строк в файле");
+        System.out.println("2) Вывод частоты вхождения каждого символа");
+        System.out.println("3) Вывод количества символов в файле");
     }
 
     @Override
@@ -30,7 +29,7 @@ public class TxtFileModule implements FileModule{
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             // Считываем строки из файла
             long count = reader.lines().count();
-            System.out.println("Количество строк в файле: " + count);
+            System.out.println("Количество строк: " + count);
         } catch (IOException e) {
             System.out.println("Ошибка при чтении файла: " + e.getMessage());
         }
@@ -41,7 +40,6 @@ public class TxtFileModule implements FileModule{
         File file = new File(basePath+"\\"+path);
         Map<Character, Integer> mapLetterToCount = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            // Считываем строки из файла
             String line;
             while ((line = reader.readLine()) != null) {
                 for (char letter : line.toCharArray()){
@@ -50,7 +48,7 @@ public class TxtFileModule implements FileModule{
             }
 
             for (Map.Entry<Character, Integer> entry : mapLetterToCount.entrySet()){
-                System.out.printf("%c встречается - %d раз%n", entry.getKey(), entry.getValue());
+                System.out.printf("Символ '%c' встречается - %d раз%n", entry.getKey(), entry.getValue());
             }
         } catch (IOException e) {
             System.out.println("Ошибка при чтении файла: " + e.getMessage());
@@ -62,13 +60,10 @@ public class TxtFileModule implements FileModule{
         File file = new File(basePath+"\\"+path);
         Map<Character, Integer> mapLetterToCount = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            // Считываем строки из файла
-
             long count = 0;
             while (reader.read() != -1) {
                 count++;
             }
-
             System.out.printf("В файле - %d символов%n", count);
 
         } catch (IOException e) {

@@ -20,8 +20,8 @@ import javax.imageio.ImageIO;
 
 @Component
 public class ImageFileModule implements FileModule{
-    String basePath = "C:\\Users\\val_4\\source\\repos\\JavaLaba8.2\\JustDirWithRandomFiles";
-    //Завтра доделать
+    String basePath = "C:\\Users\\val_4\\source\\repos\\JavaLaba8.2\\Test_files";
+
     @Override
     public boolean isCurrentFileFormatWorks(String path) {
         return path.endsWith(".jpg");
@@ -29,22 +29,19 @@ public class ImageFileModule implements FileModule{
 
     @Override
     public void getDesc() {
-        System.out.println("Функция номер 1 - выводит размер изображения");
-        System.out.println("Функция номер 2 - выводит информацию exif");
-        System.out.println("Функция номер 3 - выводит дату сьёмки из информации exif");
+        System.out.println("1) Вывод размера изображения");
+        System.out.println("2) Вывод информации EXIF");
+        System.out.println("3) Вывод даты сьёмки из информации EXIF");
     }
 
     @Override
     public void method1(String path) {
         File file = new File(basePath+"\\"+path);
         try {
-            // Загрузка изображения
             BufferedImage image = ImageIO.read(file);
-            // Получение размеров изображения
             int width = image.getWidth();
             int height = image.getHeight();
 
-            // Вывод размеров
             System.out.println("Ширина: " + width + " пикселей");
             System.out.println("Высота: " + height + " пикселей");
         } catch (IOException e) {
@@ -58,16 +55,14 @@ public class ImageFileModule implements FileModule{
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
 
-            // Получаем директорию Exif
             ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
 
             if (directory != null) {
-                // Получаем все теги Exif из директории Exif
                 for (Tag tag : directory.getTags()) {
                     System.out.println(tag.getTagName() + " : " + tag.getDescription());
                 }
             }else {
-                System.out.println("В данном файле нет EXIF информации");
+                System.out.println("В файле нет EXIF информации");
             }
         } catch (ImageProcessingException | IOException e) {
             e.printStackTrace();

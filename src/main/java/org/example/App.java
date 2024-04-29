@@ -10,10 +10,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Hello world!
- *
- */
 @SpringBootApplication(scanBasePackages = "org.example")
 
 public class App
@@ -28,8 +24,7 @@ public class App
         SpringApplication.run(App.class, args);
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println( "Здравствуйте, вас приветсвует обработчик файлов, введите имя файла, " +
-                "чтобы я мог начать с ним работу");
+        System.out.println( "Введите имя файла, с которым хотите работать");
 
 
         FileModule fileModuleForThisFormat = null;
@@ -43,13 +38,13 @@ public class App
         }
 
         if(fileModuleForThisFormat == null){
-            System.out.println("К сожалению данный формат файла не поддерживается");
+            System.out.println("К сожалению данный формат файла не поддерживается или файла не существует");
         }
         else {
-            System.out.println("Выберите какую из предложенных функций вы бы хотели использовать:");
+            System.out.println("Какую из предложенных функций вы бы хотели использовать?");
             fileModuleForThisFormat.getDesc();
             while (true){
-                System.out.print("Введите номер функции:");
+                System.out.println("(введите номер функции)");
                 String funcNum = scanner.nextLine();
                 switch(funcNum){
                     case("1"):
@@ -62,7 +57,7 @@ public class App
                         fileModuleForThisFormat.method3(fileName);
                         return;
                     default:
-                        System.out.println("Вы не выбрали не одну из функций, попробуйте ещё раз");
+                        System.out.println("Выберите одну из предложенных функций");
                         break;
                 }
             }
