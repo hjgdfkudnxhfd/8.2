@@ -53,8 +53,10 @@ public class ImageFileModule implements FileModule{
     public void method2(String path) {
         File file = new File(basePath+"\\"+path);
         try {
+            //Используется библиотека ImageMetadataReader для чтения метаданных EXIF из файла изображения
             Metadata metadata = ImageMetadataReader.readMetadata(file);
 
+            //Получение директории EXIF
             ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
 
             if (directory != null) {
@@ -75,7 +77,7 @@ public class ImageFileModule implements FileModule{
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
 
-            // Получаем директорию Exif
+            // Получаем директорию EXIF
             ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
 
             if (directory != null) {
